@@ -1,0 +1,54 @@
+name: Oi Polloi Selenium UI Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oipolloi-ui-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ui-tests:
+    name: Selenium UI tests (Java 21 / Chrome)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Show tool versions
+        run: |
+          java --version
+          mvn --version
+          google-chrome --version
+
+      - name: Run TestNG suite
+        run: mvn --batch-mode --no-transfer-progress clean test -Pci
+        env:
+          CI: true
+
+      - name: Upload Surefire reports and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: oipolloi-ui-test-results
+          path: |
+            target/surefire-reports/
+            target/failure-screenshots/
+          if-no-files-found: warn
+          retention-days: 14

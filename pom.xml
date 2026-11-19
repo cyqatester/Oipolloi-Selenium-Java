@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.oipolloi</groupId>
+    <artifactId>oipolloi-ui-automation</artifactId>
+    <version>1.0.0</version>
+    <name>Oi Polloi Selenium UI Automation</name>
+    <description>Page Object Model UI tests for oipolloi.com using Selenium, Java, Maven and TestNG.</description>
+
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <selenium.version>4.53.0</selenium.version>
+        <testng.version>7.11.0</testng.version>
+        <compiler.plugin.version>3.16.0</compiler.plugin.version>
+        <surefire.plugin.version>3.5.4</surefire.plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler.plugin.version}</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.plugin.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <systemPropertyVariables>
+                        <baseUrl>${baseUrl}</baseUrl>
+                        <browser>${browser}</browser>
+                        <headless>${headless}</headless>
+                        <timeoutSeconds>${timeoutSeconds}</timeoutSeconds>
+                    </systemPropertyVariables>
+                    <useFile>true</useFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation><activeByDefault>true</activeByDefault></activation>
+            <properties>
+                <baseUrl>https://oipolloi.com</baseUrl>
+                <browser>chrome</browser>
+                <headless>false</headless>
+                <timeoutSeconds>12</timeoutSeconds>
+            </properties>
+        </profile>
+        <profile>
+            <id>ci</id>
+            <properties>
+                <baseUrl>https://oipolloi.com</baseUrl>
+                <browser>chrome</browser>
+                <headless>true</headless>
+                <timeoutSeconds>15</timeoutSeconds>
+            </properties>
+        </profile>
+    </profiles>
+</project>
