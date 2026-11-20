@@ -2,6 +2,8 @@ package com.oipolloi.automation.driver;
 
 import com.oipolloi.automation.config.Config;
 import java.time.Duration;
+
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,39 +14,6 @@ public final class DriverFactory {
     private static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<>();
 
     private DriverFactory() {}
-
-    // public static WebDriver createDriver() {
-    //     WebDriver driver;
-    //     switch (Config.browser()) {
-    //         case "chrome" -> {
-    //             ChromeOptions options = new ChromeOptions();
-    //             options.addArguments("--disable-notifications", "--disable-popup-blocking",
-    //                     "--window-size=1440,1000", "--no-sandbox", "--disable-dev-shm-usage");
-    //             if (Config.headless()) {
-    //                 options.addArguments("--headless=new");
-    //             }
-    //             driver = new ChromeDriver(options);
-    //         }
-    //         case "firefox" -> {
-    //             FirefoxOptions options = new FirefoxOptions();
-    //             if (Config.headless()) {
-    //                 options.addArguments("-headless");
-    //             }
-    //             driver = new FirefoxDriver(options);
-    //         }
-    //         default -> throw new IllegalArgumentException(
-    //                 "Unsupported browser: " + Config.browser() + ". Supported: chrome, firefox");
-    //     }
-
-    //     driver.manage().timeouts().implicitlyWait(Duration.ZERO);
-    //     driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(45));
-    //     driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(20));
-    //     if (!Config.headless()) {
-    //         driver.manage().window().maximize();
-    //     }
-    //     DRIVER.set(driver);
-    //     return driver;
-    // }
 
     public static WebDriver createDriver() {
         if (DRIVER.get() != null) {
@@ -92,7 +61,7 @@ public final class DriverFactory {
             driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(20));
 
             if (!Config.headless()) {
-                driver.manage().window().maximize();
+                driver.manage().window().setSize(new Dimension(1440, 1000));
             }
 
             DRIVER.set(driver);
