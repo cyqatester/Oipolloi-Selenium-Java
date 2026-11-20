@@ -1,5 +1,10 @@
 # Oi Polloi UI Automation
 
+<p>
+<picture>
+  <img width="1080" height="607" alt="Oipolloi_Selenium_Tests" src="https://github.com/user-attachments/assets/bdd639fc-3713-46f3-8275-9f94a67d6844" />
+</picture>  
+</p>
 Selenium WebDriver + Java 21 + Maven + TestNG project using the Page Object Model (POM) for public storefront checks on [oipolloi.com](https://oipolloi.com/).
 
 ## Included coverage
@@ -115,3 +120,6 @@ The homepage's observed navigation includes Shop All/Latest, Clothing, Footwear,
 GitHub Actions runs headless Chrome on pushes, pull requests, and manual dispatch. Maven dependencies are cached. Test reports and failure screenshots are uploaded even when a test fails.
 
 Add this project to a GitHub repository and push the files to enable the workflow.
+
+<img width="551" height="422" alt="image" src="https://github.com/user-attachments/assets/52975ef8-3f2b-47af-bede-18f9e4e60bf6" />
+
