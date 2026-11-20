@@ -5,7 +5,8 @@
   <img width="1080" height="607" alt="Oipolloi_Selenium_Tests" src="https://github.com/user-attachments/assets/bdd639fc-3713-46f3-8275-9f94a67d6844" />
 </picture>  
 </p>
-Selenium WebDriver + Java 21 + Maven + TestNG project using the Page Object Model (POM) for public storefront checks on [oipolloi.com](https://oipolloi.com/).
+
+Selenium WebDriver + Java 21 + Maven + TestNG project using the Page Object Model (POM) for public storefront checks on [Oipolloi.com](https://oipolloi.com)
 
 ## Included coverage
 
